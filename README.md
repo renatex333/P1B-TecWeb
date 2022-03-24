@@ -50,13 +50,18 @@ Para verificar se a instalação foi bem sucedida, inicie o Python em sua versã
     import django
     print(django.get_version())
 
-Para iniciar o servidor:
+## Iniciando o servidor do Docker para iniciar o banco de dados
 
-Execute o container (no PowerShell)
+Execute o container (no PowerShell):
 
     docker run --rm --name pg-docker -e POSTGRES_PASSWORD=escolhaumasenha -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
     
-Rode o servidor (no Prompt no caminho do projeto)
+Rode o servidor (no Prompt no caminho do projeto):
 
     python manage.py runserver
+
+Para fechar o servidor do Docker:
+
+    docker kill pg-docker
+
 
