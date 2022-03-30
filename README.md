@@ -49,6 +49,36 @@ Para verificar se a instalação foi bem sucedida, inicie o Python em sua versã
 
     import django
     print(django.get_version())
+    
+## Configuração do Docker no Django
+
+Agora vamos configurar o Django para que ele utilize o Postgres do nosso container ao invés do SQLite. Para isso será necessário instalar o módulo psycopg2 (não se esqueça de ativar o ambiente virtual antes):
+
+
+    pip install psycopg2
+    
+Procure o código a seguir no arquivo getit/settings.py no seu projeto:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+Substitua esse dicionário por:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'getit',
+            'USER': 'getituser',
+            'PASSWORD': 'getitsenha',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
+
+Pronto! Seu projeto Django está configurado para utilizar o Postgres!
 
 ## Iniciando o servidor do Docker para iniciar o banco de dados
 
