@@ -4,12 +4,25 @@ from .models import Note
 def index(request):
     if request.method == 'POST':
         id = request.POST.get('id')
-        print(f"id = {id}")
         title = request.POST.get('titulo')
         content = request.POST.get('detalhes')
-        # TAREFA: Utilize o title e content para criar um novo Note no banco de dados
-        new_note = Note(title=title, content=content)
-        new_note.save()
+        title_edit = request.POST.get('titulo-edit')
+        content_edit = request.POST.get('detalhes-edit')
+
+        print(f"id = {id}")
+        print(f"title = {title}")
+        print(f"content = {content}")
+        print(f"title = {title_edit}")
+        print(f"content = {content_edit}")
+
+        if not id:
+            new_note = Note(title=title, content=content)
+            new_note.save()
+        elif id and title_edit and content_edit:
+            Note.objects.filter(id = id).update(title=title_edit, content=content_edit)
+        elif id and not title_edit:
+            Note.objects.filter(id = id).delete()
+            
         return redirect('index')
     else:
         all_notes = Note.objects.all()
