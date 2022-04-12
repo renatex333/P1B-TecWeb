@@ -9,12 +9,6 @@ def index(request):
         title_edit = request.POST.get('titulo-edit')
         content_edit = request.POST.get('detalhes-edit')
 
-        print(f"id = {id}")
-        print(f"title = {title}")
-        print(f"content = {content}")
-        print(f"title = {title_edit}")
-        print(f"content = {content_edit}")
-
         if not id:
             new_note = Note(title=title, content=content)
             new_note.save()
