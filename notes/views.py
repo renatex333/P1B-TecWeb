@@ -32,5 +32,12 @@ def api_note(request, note_id):
         note = Note.objects.get(id=note_id)
     except Note.DoesNotExist:
         raise Http404()
+    
+    if request.method == 'POST':
+        new_note_data = request.data
+        note.title = new_note_data['title']
+        note.content = new_note_data['content']
+        note.save()
+
     serialized_note = NoteSerializer(note)
     return Response(serialized_note.data)
