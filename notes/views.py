@@ -26,7 +26,7 @@ def index(request):
         all_notes = Note.objects.all()
         return render(request, 'notes/index.html', {'notes': all_notes})
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def api_note(request, note_id):
     try:
         note = Note.objects.get(id=note_id)
@@ -38,6 +38,10 @@ def api_note(request, note_id):
         note.title = new_note_data['title']
         note.content = new_note_data['content']
         note.save()
+
+    elif request.method == 'DELETE':
+        note.delete()
+        return Response(status = 204)
 
     serialized_note = NoteSerializer(note)
     return Response(serialized_note.data)
