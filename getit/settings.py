@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-yum+==afhe%!%5-cx1hvu95@!ff$-e61)=)3v#7_uh7d3p%h*('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'getit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'getit',
-        'USER': 'getituser',
-        'PASSWORD': 'getitsenha',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'projectdb',
+        'USER': 'admin',
+        'PASSWORD': 'password',
+        'HOST': 'host',
+        'PORT': '3306',
     }
 }
 
